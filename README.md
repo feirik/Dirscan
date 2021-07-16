@@ -1,5 +1,5 @@
 ### Brief
-Simple Python3 web directory scanner. Outputs found web site directories to file and stdout. Uses OWASP directory list for scanning, based on an [older python project](https://github.com/NoobieDog/Dir-Xcan).
+Simple Python3 web directory scanner. Outputs found web site directories to file and console. Uses an OWASP directory list for scanning. The scripts are based on an [older python project](https://github.com/NoobieDog/Dir-Xcan).
 
 
 #### Usage: python3 dirscan.py [-d, -n, -o] `<IP or domain name for target, http or https included>`

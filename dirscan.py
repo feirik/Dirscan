@@ -45,7 +45,9 @@ parser.add_argument("-d", "--directory", type=str,
                                          help="Path to directory word list. Default is directorylist.txt in location of script.",
                                          default="directorylist.txt")
 parser.add_argument("-n", "--threadnumber", type=int, help="Number of threads. Default is 5 threads.", default=5)
-parser.add_argument("-o", "--outfile", type=str, help="Output file directory path", default="dirscan_result.txt")
+parser.add_argument("-o", "--outfile", type=str,
+                                       help="Output file directory path. Default is dirscan_result.txt in location of script.",
+                                       default="dirscan_result.txt")
 args, target = parser.parse_known_args()
 
 # Check that a target website was included as an argument
