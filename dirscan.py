@@ -13,32 +13,9 @@
 import argparse
 import queue
 import sys
-import threading
 import time
 
 import dirscanLib
-
-# Instantiate global queue
-queue = queue.Queue()
-
-
-# Threading class to get work from global queue to check directories
-class ThreadUrl(threading.Thread):
-    def __init__(self, queue):
-        threading.Thread.__init__(self)
-        # Use global queue
-        self.queue = queue
-
-    def run(self):
-        while True:
-            try:
-                # Process task
-                directory = self.queue.get()
-                dirscanLib.check_directory(directory, target[0], output_file, len(directories))
-                self.queue.task_done()
-            except SystemExit:
-                print("Shutting down")
-
 
 parser = argparse.ArgumentParser(description='Simple web directory scanner.')
 parser.add_argument("-d", "--directory", type=str,
@@ -66,11 +43,16 @@ except IndexError:
 with open(args.directory) as file:
     directories = file.readlines()
 
+directory_len = len(directories)
+
+# Instantiate global queue
+queue = queue.Queue()
+
 
 def main():
     # Start threads
     for i in range(args.threadnumber):
-        t = ThreadUrl(queue)
+        t = dirscanLib.Dirscan(queue, target[0], output_file, directory_len)
         t.setDaemon(True)
         t.start()
 
