@@ -52,6 +52,9 @@ class Dirscan(threading.Thread):
             elif status_code == 403:
                 Forbidden = Forbidden + 1
                 CheckedLines += 1
+                self.outfile.write("FORBIDDEN %s/%s" % (self.target, directory))
+                sys.stdout.write("FORBIDDEN %s/%s" % (self.target, directory))
+                sys.stdout.flush()
             elif status_code == 404:
                 NotFound += 1
                 CheckedLines += 1
